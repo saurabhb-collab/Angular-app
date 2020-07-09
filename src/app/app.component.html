@@ -1,0 +1,55 @@
+<div class="conatiner hero" style="background-image: url(assets/personal.jpg);"></div>
+ <p class="alertMsg"><strong>{{msg}}</strong></p>
+   <div class="container">
+      <h2>Apply for Personal Loan</h2>
+        <form [formGroup]='myForm' class="myform">
+         <div class="form-row">
+             <div class="form-group col-md-6">
+                      <input type="text" name="city" formControlName="city"  class="form-control input--style-5" placeholder="Enter City Name" tabindex="1"> 
+                       <div *ngIf="myForm.get('city').invalid && (myForm.get('city').dirty || myForm.get('city').touched)"class="alert alert-danger">
+                         <div *ngIf="myForm.get('city').errors.required">City Name is required.</div>
+                      </div>
+                   </div>
+                   <div class="form-group col-md-6">
+                     <input type="text" name="panName" formControlName="panName"  class="form-control input--style-5" placeholder="Enter PAN Number" tabindex="1">
+                     <div *ngIf="myForm.get('panName').invalid && (myForm.get('panName').dirty || myForm.get('panName').touched)"class="alert alert-danger">
+                       <div *ngIf="myForm.get('panName').errors.required || myForm.get('panName').errors.maxlength || myForm.get('panName').errors.pattern">Enter Valid PAN Number.</div>
+                     </div>
+                 </div>
+                </div>
+             <div class="form-row">
+                <div class="form-group col-md-6">
+                   <input type="text" name="fullname" formControlName="fullname"  class="form-control input--style-5" placeholder="Enter Full Name" tabindex="1"> 
+                   <div *ngIf="myForm.get('fullname').invalid && (myForm.get('fullname').dirty || myForm.get('fullname').touched)"class="alert alert-danger">
+                     <div *ngIf="myForm.get('fullname').errors.required || myForm.get('fullname').errors.maxlength">FullName is required.</div>
+                    </div>
+                 </div>
+                  <div class="form-group col-md-6">
+                      <input type="email" name="email" formControlName="email"  class="form-control input--style-5" placeholder="Enter Email" tabindex="1"> 
+                      <div *ngIf="myForm.get('email').invalid && (myForm.get('email').dirty || myForm.get('email').touched)"class="alert alert-danger">
+                        <div *ngIf="myForm.get('email').errors.required || myForm.get('email').errors.email || myForm.get('email').errors.maxlength">Valid Email is required.</div>
+                      </div>
+                  </div>
+              </div>
+             <div class="form-row">
+                 <div class="form-group  col-md-6">
+                   <div class="input-group">
+                    <span class="input-group-addon">+91</span>
+                      <input type="text" name="mobile"  formControlName="mobile" class="form-control input--style-5" (ngModelChange) = "getOTP(myForm.value)"  placeholder="Enter Mobile Number" tabindex="6"> 
+                    </div>
+                     <div *ngIf="myForm.get('mobile').invalid && (myForm.get('mobile').dirty || myForm.get('mobile').touched)"class="alert alert-danger">
+                       <div *ngIf="myForm.get('mobile').errors.required || myForm.get('mobile').errors.pattern">Mobile Number is Required</div>
+                      </div>
+                  </div>
+                <div class="form-group col-md-4">
+                  <input type="text" name="otp" formControlName="otp" class="form-control input--style-5"  (ngModelChange) = "verifyOtp(myForm.value)" placeholder="Enter OTP" tabindex="6"> 
+                   <div *ngIf="myForm.get('otp').invalid && (myForm.get('otp').dirty || myForm.get('otp').touched)"class="alert alert-danger">
+                    <div *ngIf="myForm.get('otp').errors.required || myForm.get('otp').errors.maxlength || myForm.get('otp').errors.pattern">Enter 4 digit OTP.</div>
+                  </div>
+                </div>
+                <div class="form-group col-md-2">
+                  <button type="button" [disabled]="disabled" #button class="btn btn-link"  (click)="Resend(myForm.value)">Resend OTP</button>
+                </div>
+            </div>
+        </form>
+  
